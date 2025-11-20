@@ -1,5 +1,6 @@
-import { Filter, CheckCircle2, Clock, AlertCircle } from "lucide-react";
+import { CheckCircle2, Clock, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { NavLink } from "@/components/NavLink";
 
 interface FilterOption {
   id: string;
@@ -7,20 +8,20 @@ interface FilterOption {
   count: number;
   icon: React.ComponentType<{ className?: string }>;
   color: string;
+  path: string;
 }
 
 const filterOptions: FilterOption[] = [
-  { id: "pending", label: "Pendentes", count: 42, icon: Clock, color: "text-accent" },
-  { id: "updated", label: "Atualizados", count: 128, icon: CheckCircle2, color: "text-primary" },
-  { id: "errors", label: "Erros", count: 5, icon: AlertCircle, color: "text-destructive" },
+  { id: "pending", label: "Pendentes", count: 42, icon: Clock, color: "text-accent", path: "/" },
+  { id: "updated", label: "Atualizados", count: 128, icon: CheckCircle2, color: "text-primary", path: "/updated" },
+  { id: "errors", label: "Erros", count: 5, icon: AlertCircle, color: "text-destructive", path: "/errors" },
 ];
 
 interface DashboardSidebarProps {
   activeFilter: string;
-  onFilterChange: (filter: string) => void;
 }
 
-export function DashboardSidebar({ activeFilter, onFilterChange }: DashboardSidebarProps) {
+export function DashboardSidebar({ activeFilter }: DashboardSidebarProps) {
   return (
     <aside className="w-64 bg-sidebar border-r border-sidebar-border flex flex-col">
       {/* Header */}
@@ -31,27 +32,21 @@ export function DashboardSidebar({ activeFilter, onFilterChange }: DashboardSide
         <p className="text-sm text-muted-foreground">Carpal | New Holland</p>
       </div>
 
-      {/* Filters */}
+      {/* Navigation */}
       <div className="flex-1 p-4 space-y-2">
-        <div className="flex items-center gap-2 mb-3 text-sidebar-foreground">
-          <Filter className="h-4 w-4" />
-          <span className="text-sm font-semibold">Filtros de Status</span>
-        </div>
-
         {filterOptions.map((option) => {
           const Icon = option.icon;
           const isActive = activeFilter === option.id;
           
           return (
-            <button
+            <NavLink
               key={option.id}
-              onClick={() => onFilterChange(option.id)}
+              to={option.path}
               className={cn(
                 "w-full flex items-center justify-between p-3 rounded-lg transition-all",
-                isActive
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground shadow-sm"
-                  : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+                "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
               )}
+              activeClassName="bg-sidebar-accent text-sidebar-accent-foreground shadow-sm"
             >
               <div className="flex items-center gap-3">
                 <Icon className={cn("h-5 w-5", isActive ? option.color : "text-muted-foreground")} />
@@ -65,7 +60,7 @@ export function DashboardSidebar({ activeFilter, onFilterChange }: DashboardSide
               >
                 {option.count}
               </span>
-            </button>
+            </NavLink>
           );
         })}
       </div>
