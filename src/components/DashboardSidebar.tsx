@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { RefreshCw, Filter, CheckCircle2, Clock, AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Filter, CheckCircle2, Clock, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FilterOption {
@@ -18,13 +16,11 @@ const filterOptions: FilterOption[] = [
 ];
 
 interface DashboardSidebarProps {
-  onSync: () => void;
-  isSyncing: boolean;
   activeFilter: string;
   onFilterChange: (filter: string) => void;
 }
 
-export function DashboardSidebar({ onSync, isSyncing, activeFilter, onFilterChange }: DashboardSidebarProps) {
+export function DashboardSidebar({ activeFilter, onFilterChange }: DashboardSidebarProps) {
   return (
     <aside className="w-64 bg-sidebar border-r border-sidebar-border flex flex-col">
       {/* Header */}
@@ -32,20 +28,7 @@ export function DashboardSidebar({ onSync, isSyncing, activeFilter, onFilterChan
         <h1 className="text-xl font-bold text-sidebar-foreground mb-1">
           Gestão de Imagens
         </h1>
-        <p className="text-sm text-muted-foreground">E-commerce Sync</p>
-      </div>
-
-      {/* Sync Button */}
-      <div className="p-4">
-        <Button
-          onClick={onSync}
-          disabled={isSyncing}
-          className="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
-          size="lg"
-        >
-          <RefreshCw className={cn("mr-2 h-4 w-4", isSyncing && "animate-spin")} />
-          {isSyncing ? "Sincronizando..." : "Sincronizar com Fábrica"}
-        </Button>
+        <p className="text-sm text-muted-foreground">Carpal | New Holland</p>
       </div>
 
       {/* Filters */}

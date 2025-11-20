@@ -1,6 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 import type { Product } from "./TreeViewItem";
 
@@ -41,33 +41,15 @@ export function ProductGrid({ products, selectedItems, onSelectionChange }: Prod
               SKU: {product.sku}
             </Badge>
 
-            {/* Image Comparison */}
-            <div className="grid grid-cols-[1fr,auto,1fr] gap-2 items-center">
-              {/* Current Image */}
-              <div className="space-y-1">
-                <p className="text-xs text-muted-foreground font-medium">Atual</p>
-                <div className="aspect-square rounded-md overflow-hidden bg-muted border border-border">
-                  <img
-                    src={product.currentImage}
-                    alt={`${product.name} - atual`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-
-              {/* Arrow */}
-              <ArrowRight className="h-5 w-5 text-primary flex-shrink-0" />
-
-              {/* New Image */}
-              <div className="space-y-1">
-                <p className="text-xs text-primary font-medium">Nova</p>
-                <div className="aspect-square rounded-md overflow-hidden bg-muted border border-primary/50">
-                  <img
-                    src={product.newImage}
-                    alt={`${product.name} - nova`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+            {/* New Image */}
+            <div className="space-y-1">
+              <p className="text-xs text-primary font-medium">Nova Imagem</p>
+              <div className="aspect-square rounded-md overflow-hidden bg-muted border border-primary/50">
+                <img
+                  src={product.newImage}
+                  alt={`${product.name} - nova imagem`}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>

@@ -6,25 +6,8 @@ import { mockCategories } from "@/data/mockData";
 import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const [isSyncing, setIsSyncing] = useState(false);
   const [activeFilter, setActiveFilter] = useState("pending");
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
-
-  const handleSync = () => {
-    setIsSyncing(true);
-    toast({
-      title: "Sincronização iniciada",
-      description: "Buscando imagens atualizadas da fábrica...",
-    });
-
-    setTimeout(() => {
-      setIsSyncing(false);
-      toast({
-        title: "Sincronização concluída",
-        description: "42 novas imagens encontradas",
-      });
-    }, 3000);
-  };
 
   const handleSelectionChange = (ids: string[], checked: boolean) => {
     setSelectedItems((prev) => {
@@ -59,8 +42,6 @@ const Index = () => {
   return (
     <div className="flex min-h-screen w-full bg-gradient-subtle">
       <DashboardSidebar
-        onSync={handleSync}
-        isSyncing={isSyncing}
         activeFilter={activeFilter}
         onFilterChange={setActiveFilter}
       />
