@@ -6,7 +6,6 @@ import { mockCategories } from "@/data/mockData";
 import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const [activeFilter, setActiveFilter] = useState("pending");
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
 
   const handleSelectionChange = (ids: string[], checked: boolean) => {
@@ -41,10 +40,7 @@ const Index = () => {
 
   return (
     <div className="flex min-h-screen w-full bg-gradient-subtle">
-      <DashboardSidebar
-        activeFilter={activeFilter}
-        onFilterChange={setActiveFilter}
-      />
+      <DashboardSidebar activeFilter="pending" />
 
       <main className="flex-1 overflow-auto">
         <div className="p-8">
