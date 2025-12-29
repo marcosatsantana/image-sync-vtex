@@ -1,13 +1,13 @@
-import { Upload } from "lucide-react";
+import { Upload, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 interface FloatingActionBarProps {
   selectedCount: number;
   onUpdate: () => void;
+  isUpdating?: boolean;
 }
 
-export function FloatingActionBar({ selectedCount, onUpdate }: FloatingActionBarProps) {
+export function FloatingActionBar({ selectedCount, onUpdate, isUpdating = false }: FloatingActionBarProps) {
   if (selectedCount === 0) return null;
 
   return (
@@ -22,11 +22,21 @@ export function FloatingActionBar({ selectedCount, onUpdate }: FloatingActionBar
 
         <Button
           onClick={onUpdate}
-          className="bg-gradient-primary hover:opacity-90 transition-opacity rounded-full"
+          disabled={isUpdating}
+          className="bg-gradient-primary hover:opacity-90 transition-opacity rounded-full disabled:opacity-50"
           size="lg"
         >
-          <Upload className="mr-2 h-4 w-4" />
-          Atualizar Selecionados
+          {isUpdating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Enviando...
+            </>
+          ) : (
+            <>
+              <Upload className="mr-2 h-4 w-4" />
+              Atualizar Selecionados
+            </>
+          )}
         </Button>
       </div>
     </div>
